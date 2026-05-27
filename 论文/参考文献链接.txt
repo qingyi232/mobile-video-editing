@@ -1,0 +1,86 @@
+[1] 中国互联网络信息中心. 第53次中国互联网络发展状况统计报告[R]. 北京: CNNIC, 2024.
+    链接: https://cnnic.cn/n4/2024/0322/c88-10964.html
+
+[2] Teng X, Gui X, Dai H, Du T, Wang Z, Li H. A Smooth Video Summarization Method Based on Frame-Filling[C]//ICCT 2020.
+    链接: https://ieeexplore.ieee.org/document/9295765
+
+[3] Parihar A S, Mittal R, Jain P, Himanshu. Survey and Comparison of Video Summarization Techniques[C]//ICCCSP 2021.
+    链接: https://doi.org/10.1109/ICCCSP52374.2021.9465347
+
+[4] Li H, Zhu Y, Shang Z, Wang Z, Wu X. A Comprehensive Survey on Video Summarization[J]. IEEE TCSVT, 2025.
+    链接: https://pure.bit.edu.cn/en/publications/a-comprehensive-survey-on-video-summarization-challenges-and-adva/
+
+[5] Altundogan T G, Karaköse M, Mert F. A New Multi Objective Video Summarization Approach[J]. IEEE Access, 2025.
+    链接: https://researchr.org/publication/AltundoganKM25
+
+[6] Patil S, Nandvikar S, Pardeshi A, Kurhade S. Automatic Devanagari Text Summarization for Youtube Videos[C]//INNOCOMP 2024.
+    链接: https://www.proceedings.com/content/076/076133webtoc.pdf
+
+[7] 周洁. 剪辑、调色、特效制作、人工智能在短视频中的运用[J]. 西部广播电视, 2023(S1): 52-55.
+    链接: https://kns.cnki.net （知网搜索"周洁 剪辑 调色 人工智能 短视频 西部广播电视"）
+    引用来源确认: https://ojs.as-pub.com/index.php/JYYJ/article/download/7767/3621/
+
+[8] 程宝凯, 代超越, 孙孟研. 人工智能在影视解说与自动化剪辑中的应用研究[J]. 信息记录材料, 2025, 26(9): 237-241.
+    链接: https://kns.cnki.net （知网搜索"程宝凯 人工智能 影视解说 自动化剪辑"）
+    引用来源确认: http://dianda.cqvip.com/Qikan/Article/Detail?id=7113156481 （同页面引用列表）
+
+[9] 张陆园. 人工智能影像生产模式的技术赋能、媒介特征与文化危机[J]. 当代电影, 2023(9): 77-84.
+    链接: https://kns.cnki.net （知网搜索"张陆园 人工智能影像 当代电影"）
+    引用来源确认: https://ojs.as-pub.com/index.php/JYYJ/article/download/7767/3621/
+
+[10] 陈捷. 智能剪辑背景下AI技术在微视频剪辑中的应用研究[J]. 记者摇篮, 2025, (11): 141-143.
+     链接: http://dianda.cqvip.com/Qikan/Article/Detail?id=7113156481
+
+[11] 赵宁宁. 技术驱动下编导与剪辑工作面临的挑战与对策研究[J]. 传播力研究, 2025, 9(21): 154-156.
+     链接: https://kns.cnki.net （知网搜索"赵宁宁 技术驱动 编导 剪辑 传播力研究"）
+     引用来源确认: http://dianda.cqvip.com/Qikan/Article/Detail?id=7113156481 （同页面引用列表）
+
+[12] David R, Duke J, Jain A, et al. TensorFlow Lite Micro[C]//MLSys 2021.
+     链接: https://proceedings.mlsys.org/paper_files/paper/2021/hash/6c44dc73014d66ba49b28d483a8f8b0d-Abstract.html
+
+[13] 李懿昕, 张季屏. 人工智能在短视频创作中的应用与未来趋势[J]. 新闻传播科学, 2025, 13(3): 306-312.
+     链接: https://kns.cnki.net （知网搜索"李懿昕 人工智能 短视频创作 新闻传播科学"）
+     引用来源确认: http://dianda.cqvip.com/Qikan/Article/Detail?id=7113156481 （同页面引用列表）
+
+[14] Arnab A, Dehghani M, Heigold G, et al. ViViT: A Video Vision Transformer[C]//ICCV 2021.
+     链接: https://arxiv.org/abs/2103.15691
+     PDF: https://openaccess.thecvf.com/content/ICCV2021/papers/Arnab_ViViT_A_Video_Vision_Transformer_ICCV_2021_paper.pdf
+
+[15] Wei X, Shi Z, Zhang T, et al. Multimodal High-order Relation Transformer for Scene Boundary Detection[C]//ICCV 2023.
+     链接: https://openaccess.thecvf.com/content/ICCV2023/html/Wei_Multimodal_High-order_Relation_Transformer_for_Scene_Boundary_Detection_ICCV_2023_paper.html
+
+[16] Chen J, Wang J, Yuan Q, Yang Z. CNN-LSTM Model for Recognizing Video-Recorded Actions[J]. IEEE J-TEHM, 2023.
+     链接: https://ieeexplore.ieee.org/document/10143200/
+     PubMed: https://pmc.ncbi.nlm.nih.gov/articles/PMC10332470/
+
+[17] Liu Z, Ning J, Cao Y, et al. Video Swin Transformer[C]//CVPR 2022.
+     链接: https://openaccess.thecvf.com/content/CVPR2022/html/Liu_Video_Swin_Transformer_CVPR_2022_paper.html
+     GitHub: https://github.com/SwinTransformer/Video-Swin-Transformer
+
+[18] Dosovitskiy A, Beyer L, Kolesnikov A, et al. An Image is Worth 16x16 Words[C]//ICLR 2021.
+     链接: https://arxiv.org/abs/2010.11929
+
+[19] Tong Z, Song Y, Wang J, Wang L. VideoMAE[C]//NeurIPS 2022.
+     链接: https://papers.nips.cc/paper_files/paper/2022/hash/416f9cb3276121c42eebb86352a4354a-Abstract-Conference.html
+     GitHub: https://github.com/MCG-NJU/VideoMAE
+
+[20] Tan M, Le Q V. EfficientNetV2: Smaller Models and Faster Training[C]//ICML 2021.
+     链接: https://proceedings.mlr.press/v202/tan21a.html
+     arXiv: https://arxiv.org/abs/2104.00298
+
+[21] 白晨, 范涛, 王文静, 王国中. 融合多模态特征与时区检测的视频摘要算法[J]. 计算机应用研究, 2023.
+     链接: https://www.arocmag.cn/abs/2023.02.0113
+
+[22] 武光利, 李雷霆, 郭振洲, 王成祥. 基于改进的双向长短期记忆网络的视频摘要生成模型[J]. 计算机应用, 2021.
+     链接: https://www.joca.cn/CN/10.11772/j.issn.1001-9081.2020091512
+
+[23] Zhang R, Cheng T, Yang S, et al. MobileInst: Video Instance Segmentation on the Mobile[C]//AAAI 2024.
+     链接: https://ojs.aaai.org/index.php/AAAI/article/view/28555
+     arXiv: https://arxiv.org/abs/2303.17594
+
+[24] 高晗, 田育龙, 许封元, 仲盛. 深度学习模型压缩与加速综述[J]. 软件学报, 2021, 32(1): 68-92.
+     链接: https://www.jos.org.cn/1000-9825/6096.htm
+
+[25] Radford A, Kim J W, Xu T, et al. Robust Speech Recognition via Large-Scale Weak Supervision[C]//ICML 2023.
+     链接: https://proceedings.mlr.press/v202/radford23a.html
+     GitHub: https://github.com/openai/whisper

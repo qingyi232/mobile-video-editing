@@ -1,0 +1,131 @@
+========================================
+  移动端短视频智能剪辑APP - 完整启动教程
+========================================
+
+【前提条件】
+- 已安装 Android Studio（含 Android SDK、模拟器）
+- 已安装 Java JDK 17+
+- 已安装 MySQL 数据库（账号 root，密码 root）
+- 已安装 Maven
+- 已配置 ADB 环境变量（路径：C:\Users\HP\AppData\Local\Android\Sdk\platform-tools）
+- 项目文件已放在：C:\Users\HP\Desktop\bs\bishe\
+
+========================================
+第一步：启动 MySQL 数据库
+========================================
+
+1. 按 Win+R，输入 services.msc 回车，打开服务管理器
+2. 找到 MySQL 服务（名字可能是 MySQL80 或 MySQL），右键 → 启动
+3. 如果已经在运行就不用管
+
+========================================
+第二步：启动后端服务
+========================================
+
+1. 打开 CMD（按 Win+R，输入 cmd 回车）
+2. 输入以下命令：
+
+   cd C:\Users\HP\Desktop\bs\bishe\backend
+   mvn spring-boot:run
+
+3. 等待出现 "Started VideoEditApplication" 字样，说明后端启动成功
+4. 后端运行在 http://localhost:8080
+5.【重要】这个 CMD 窗口不要关闭！关了后端就停了
+
+========================================
+第三步：启动 Android 模拟器
+========================================
+
+1. 再打开一个新的 CMD 窗口（按 Win+R，输入 cmd 回车）
+2. 输入以下命令启动模拟器：
+
+   "C:\Users\HP\AppData\Local\Android\Sdk\emulator\emulator.exe" -avd Pixel_7
+
+3. 等待模拟器窗口弹出，并显示 Android 桌面（大约1-2分钟）
+4.【重要】这个 CMD 窗口也不要关闭！
+
+========================================
+第四步：安装 APP 到模拟器
+========================================
+
+（如果之前已经安装过 APP，可以跳过这步直接到第五步）
+
+1. 再打开一个新的 CMD 窗口
+2. 输入以下命令安装 APP：
+
+   "C:\Users\HP\AppData\Local\Android\Sdk\platform-tools\adb.exe" install -r "C:\Users\HP\Desktop\bs\bishe\frontend\build\app-debug.apk"
+
+3. 等待显示 "Success" 就安装成功了
+
+========================================
+第五步：导入测试视频到模拟器
+========================================
+
+（如果之前已经导入过，重启模拟器后视频还在，可以跳过）
+
+1. 在 CMD 中输入以下命令推送视频：
+
+   "C:\Users\HP\AppData\Local\Android\Sdk\platform-tools\adb.exe" push "C:\Users\HP\Desktop\bs\bishe\视频\抖音精选电脑版 - 抖音旗下优质视频平台.mp4" /sdcard/Download/test_video.mp4
+
+2. 推送音频：
+
+   "C:\Users\HP\AppData\Local\Android\Sdk\platform-tools\adb.exe" push "C:\Users\HP\Desktop\bs\bishe\音频\h3R3&赵珂-锈.mp3" /sdcard/Music/test_audio.mp3
+
+3. 重启模拟器让系统扫描新文件：
+
+   "C:\Users\HP\AppData\Local\Android\Sdk\platform-tools\adb.exe" reboot
+
+4. 等模拟器重新启动到桌面
+
+========================================
+第六步：使用 APP
+========================================
+
+1. 在模拟器中，从屏幕底部往上滑，找到 "智剪" APP 图标
+2. 点击打开 APP
+3. 首次使用需要注册账号：
+   - 点击 "注册" 标签
+   - 输入用户名（如：test）
+   - 输入密码（如：123456）
+   - 点击注册
+4. 注册成功后用账号密码登录
+5. 登录后在首页点 "新建项目"，输入项目名称
+6. 进入编辑页面后，点 "相册选择" 导入视频
+7. 在文件选择器中找到 Download 文件夹下的 test_video.mp4
+8. 选中视频即可开始编辑
+
+========================================
+常见问题
+========================================
+
+Q: 后端启动报错 "Communications link failure"
+A: MySQL 没启动。去服务管理器启动 MySQL 服务。
+
+Q: adb 提示 "不是内部或外部命令"
+A: 用完整路径代替 adb：
+   "C:\Users\HP\AppData\Local\Android\Sdk\platform-tools\adb.exe"
+
+Q: 模拟器显示 "offline"
+A: 执行以下命令重启 ADB：
+   "C:\Users\HP\AppData\Local\Android\Sdk\platform-tools\adb.exe" kill-server
+   "C:\Users\HP\AppData\Local\Android\Sdk\platform-tools\adb.exe" start-server
+
+Q: 模拟器启动报错 "Error Opening Emulator"
+A: 先杀掉残留进程再重新启动：
+   taskkill /F /IM qemu-system-x86_64.exe 2>nul
+   taskkill /F /IM emulator.exe 2>nul
+   然后重新执行第三步的启动命令
+
+Q: APP 导入视频失败
+A: 确保后端在运行（第二步的 CMD 窗口没关）
+
+Q: 选择视频时看不到视频文件
+A: 重启模拟器（adb reboot），等重启完再试
+
+========================================
+关闭顺序（用完后）
+========================================
+
+1. 关闭模拟器窗口
+2. 在后端 CMD 窗口按 Ctrl+C 停止后端
+3. 关闭所有 CMD 窗口

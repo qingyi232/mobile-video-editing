@@ -1,0 +1,246 @@
+==============================================================
+   移动端短视频智能剪辑APP - 项目进度文档
+   最后更新: 2026-05-16
+==============================================================
+
+一、项目概况
+--------------------------------------------------------------
+项目名称: 移动端短视频智能剪辑APP
+技术栈:
+  前端: Flutter 3.8+ / Dart / Provider 状态管理
+  后端: Spring Boot 3.2.5 / Java 17 / JPA + Hibernate
+  数据库: MySQL 8.0+ (JPA ddl-auto:update 自动建表)
+  视频处理: FFmpeg (服务端)
+  智能功能: CNN+LSTM 场景识别 / 百度 ASR 语音识别
+  
+项目路径: F:\26毕设2\移动端短视频智能剪辑app\
+前端路径: frontend\
+后端路径: backend\
+
+==============================================================
+二、功能模块完成状态
+==============================================================
+
+--------------------------------------------------------------
+2.1 用户系统 [已完成]
+--------------------------------------------------------------
+  [✓] 用户注册 - POST /api/auth/register
+  [✓] 用户登录 - POST /api/auth/login (JWT Token)
+  [✓] 启动页自动登录检测 (SplashScreen → checkLoginStatus)
+  [✓] 退出登录 (清除 SharedPreferences + 跳转登录页)
+  [✓] 个人资料查看 - GET /api/user/profile
+  [✓] 个人资料编辑 - PUT /api/user/profile (昵称+邮箱)
+  [✓] 修改密码 - POST /api/user/change-password
+  [✓] 头像上传 - POST /api/user/avatar (支持网络图片显示)
+  [✓] 用户统计 - GET /api/user/stats (作品数/导出数/天数/7日图表)
+
+  相关文件:
+    前端: login_screen.dart, splash_screen.dart, profile_screen.dart
+    前端: auth_provider.dart, api_service.dart
+    后端: AuthController, UserController, UserService
+
+--------------------------------------------------------------
+2.2 项目管理 [已完成]
+--------------------------------------------------------------
+  [✓] 项目列表 - GET /api/video/projects (支持按状态筛选)
+  [✓] 新建项目 - POST /api/video/projects
+  [✓] 删除项目 - DELETE /api/video/projects/{id}
+  [✓] 项目详情 - GET /api/video/projects/{id}
+  [✓] 更新项目 - PUT /api/video/projects/{id}
+  [✓] 列表排序 (最近修改/按名称/最早创建)
+  [✓] 下拉刷新
+  [✓] 空状态提示
+  [✓] 状态标签显示 (编辑中/已导出)
+  [✓] 从个人中心进入: 我的作品/已导出/草稿箱 (statusFilter)
+
+  相关文件:
+    前端: project_list_screen.dart, home_screen.dart
+    后端: VideoProjectController, VideoProjectService
+
+--------------------------------------------------------------
+2.3 视频编辑器 [已完成]
+--------------------------------------------------------------
+
+  --- 基础编辑 Tab ---
+  [✓] 视频导入 - 相册选择 (FilePicker) + 拍摄 (ImagePicker)
+  [✓] 视频上传到服务器 - POST /api/video/upload (MultipartFile)
+  [✓] 视频预览播放 - VideoPlayer + 播放/暂停控制
+  [✓] 进度条拖动查看 - Slider + seekTo (2026-05-16 验证完成)
+  [✓] 时间显示 - 当前位置/总时长 (mm:ss)
+  [✓] 片段裁剪 - POST /api/video/trim (startTime, endTime)
+  [✓] 视频拼接 - POST /api/video/concat (多段拼接)
+  [✓] 转场效果 - POST /api/video/transition
+      支持: fade/slide/zoom/rotate/wipe
+      每种效果有中文描述说明 (2026-05-16 验证完成)
+  [✓] 片段时间线 - 底部横向滚动列表，点击切换素材
+  [✓] 画面比例 - 右上角显示当前比例
+  [✓] 场景标签 - 左上角显示识别结果
+
+  --- 音频 Tab ---
+  [✓] 背景音乐与音量合并为单一区域 (2026-05-16 验证完成)
+  [✓] 音量调节滑块 (0~150%)
+  [✓] 从音乐库添加背景音乐 - POST /api/video/add-music
+  [✓] 手动取消已应用的背景音乐 (2026-05-16 验证完成)
+  [✓] 推荐音乐列表 (点击可直接添加)
+  [✓] 人声分离 - POST /api/video/separate-voice
+
+  --- 智能辅助 Tab ---
+  [✓] CNN+LSTM 场景识别 - POST /api/video/recognize-scene
+  [✓] 帧清晰度分析 - POST /api/video/analyze-clarity
+  [✓] 智能片段筛选 - POST /api/video/smart-clip (保留高质量片段)
+  [✓] 智能配乐推荐 - POST /api/music/recommend
+
+  --- 模板导出 Tab ---
+  [✓] 预设模板网格展示 (从数据库加载)
+  [✓] 模板应用 (自动设置转场+滤镜+比例)
+  [✓] 滤镜效果选择 (none/warm/cool/vintage/bw/bright/film)
+  [✓] 画面比例切换 (16:9, 9:16, 1:1, 4:3, 3:4)
+  [✓] 导出格式选择 (MP4/AVI)
+  [✓] 导出视频 - POST /api/video/export
+
+  --- 字幕 Tab ---
+  [✓] 语音识别自动字幕 - POST /api/video/subtitle (百度ASR)
+  [✓] 字幕烧录到视频 - POST /api/video/burn-subtitle
+  [✓] 字幕预览显示
+
+  --- 按钮独立响应 (2026-05-16 验证完成) ---
+  [✓] Set<String> _loadingOps 机制
+  [✓] 18个独立 opKey，按钮互不影响
+
+  相关文件:
+    前端: video_editor_screen.dart (1805行)
+    后端: VideoController, VideoService, FFmpegService
+
+--------------------------------------------------------------
+2.4 模板中心 [已完成]
+--------------------------------------------------------------
+  [✓] 模板列表 - GET /api/templates
+  [✓] 分类筛选 (全部/节日/Vlog/教程)
+  [✓] 模板卡片展示 (渐变色+图标+名称+描述+使用次数)
+  [✓] 模板详情弹窗 (2026-05-16 验证完成)
+      包含: 转场效果/滤镜风格/画面比例/建议时长/风格特点/使用次数
+  [✓] 应用模板 - POST /api/templates/{id}/use
+  [✓] 加载中骨架屏
+  [✓] 空状态提示
+
+  相关文件:
+    前端: template_screen.dart
+    后端: TemplateController, TemplateService
+
+--------------------------------------------------------------
+2.5 音乐库 [已完成]
+--------------------------------------------------------------
+  [✓] 音乐列表 - GET /api/music
+  [✓] 分类筛选 (全部/风景/人物/动态/节日/安静/动感)
+  [✓] 情绪筛选 (全部/欢快/舒缓/激昂/抒情)
+  [✓] 音乐播放预览 (audioplayers)
+  [✓] 导入本地音乐 - POST /api/music/upload (FilePicker选择)
+  [✓] 加载中骨架屏
+  [✓] 空状态提示
+
+  相关文件:
+    前端: music_screen.dart
+    后端: MusicController, MusicService
+
+--------------------------------------------------------------
+2.6 个人中心 [已完成] (2026-05-16 最后修改)
+--------------------------------------------------------------
+  [✓] 个人资料头部 (头像+昵称+用户名+邮箱)
+  [✓] 头像显示真实上传图片 (支持网络图片，失败回退文字)
+  [✓] 点击头像更换 (ImagePicker → uploadAvatar)
+  [✓] "编辑"按钮可点击 (→ 弹出编辑资料弹窗)
+  [✓] 编辑资料: 昵称 + 邮箱
+  [✓] 统计行: 作品数/导出数/使用天数
+  [✓] 近7日活跃图表 (fl_chart 柱状图)
+  [✓] 作品管理: 我的作品/已导出/草稿箱
+  [✓] 账号设置: 编辑资料/更换头像/修改密码/存储空间
+  [✓] 其他: 关于/帮助反馈
+  [✓] 退出登录 (确认弹窗)
+
+  相关文件:
+    前端: profile_screen.dart
+
+==============================================================
+三、本次修改记录 (2026-05-16)
+==============================================================
+
+修改1: frontend/android/app/src/main/AndroidManifest.xml
+  原因: 缺少 Android 存储/相机/麦克风权限声明
+  改动: 添加 INTERNET/CAMERA/RECORD_AUDIO/READ_EXTERNAL_STORAGE
+        /WRITE_EXTERNAL_STORAGE/READ_MEDIA_VIDEO/READ_MEDIA_AUDIO
+        /READ_MEDIA_IMAGES + requestLegacyExternalStorage
+  影响: 解决拖入模拟器文件后无法通过 FilePicker 选择的问题
+
+修改2: frontend/lib/screens/profile_screen.dart
+  改动:
+    a) 头像区域改为 GestureDetector(onTap: _changeAvatar)
+    b) 有 avatarUrl 时显示 Image.network，失败回退文字首字母
+    c) "编辑"按钮包裹 GestureDetector(onTap: _showEditProfile)
+    d) 编辑资料弹窗新增邮箱输入框
+    e) 个人信息显示邮箱字段
+  影响: 个人中心功能完善
+
+修改3: frontend/lib/screens/video_editor_screen.dart
+  改动: _addFirstMusicFromLibrary() 从 Future() 包裹改为 async
+        方法，全程显示 loading 状态
+  影响: "从音乐库添加"按钮在获取列表阶段也显示加载指示器
+
+==============================================================
+四、已知限制与后续建议
+==============================================================
+
+1. 视频导入方式: 目前通过 FilePicker/ImagePicker 选择文件，
+   不支持直接拖放到APP界面(Android系统限制)。
+   模拟器中需先拖放文件到模拟器窗口，再在APP内通过"相册选择"找到。
+
+2. 后端连接: 前端默认连接 http://10.0.2.2:8080 (模拟器专用)。
+   真机测试需修改 constants.dart 中的 baseUrl。
+
+3. FFmpeg: 需要在服务器上安装 FFmpeg 并配置到 PATH。
+
+4. 百度ASR: 字幕功能依赖百度语音识别API，需要有效的 AppID/API Key。
+
+5. 潜在优化方向:
+   - 视频缩略图预览 (当前只显示"片段N"文字)
+   - 撤销/重做功能
+   - 多轨时间线编辑
+   - 视频封面设置
+   - 分享到社交平台
+
+==============================================================
+五、文件结构速查
+==============================================================
+
+frontend/lib/
+├── main.dart                    # APP入口，路由配置
+├── screens/
+│   ├── splash_screen.dart       # 启动页 (2s动画+自动登录)
+│   ├── login_screen.dart        # 登录/注册 (带验证)
+│   ├── home_screen.dart         # 主页 (5Tab底部导航+FAB)
+│   ├── project_list_screen.dart # 项目列表 (排序+删除+刷新)
+│   ├── video_editor_screen.dart # 视频编辑器 (5Tab, 1805行)
+│   ├── template_screen.dart     # 模板中心 (分类+详情弹窗)
+│   ├── music_screen.dart        # 音乐库 (分类+情绪+播放+导入)
+│   └── profile_screen.dart      # 个人中心 (资料+统计+设置)
+├── services/
+│   └── api_service.dart         # API层 (Dio, 所有接口)
+├── providers/
+│   └── auth_provider.dart       # 认证状态 (ChangeNotifier)
+└── utils/
+    ├── app_theme.dart           # 暗色主题
+    └── constants.dart           # 常量 (baseUrl等)
+
+backend/src/main/
+├── resources/
+│   └── application.yml          # 配置 (DB/JWT/FFmpeg/上传路径)
+└── java/
+    └── com/.../
+        ├── controller/          # REST 接口层
+        ├── service/             # 业务逻辑层
+        ├── repository/          # JPA 数据访问层
+        ├── entity/              # 数据库实体
+        ├── dto/                 # 数据传输对象
+        ├── config/              # 安全/CORS/静态资源配置
+        └── util/                # JWT/FFmpeg 工具类
+
+==============================================================

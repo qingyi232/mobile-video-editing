@@ -1,0 +1,226 @@
+================================================================================
+  移动端短视频智能剪辑 APP — 代码结构与技术说明
+================================================================================
+
+本文说明仓库目录含义、后端分层、主要接口、移动端模块划分与数据流，
+便于二次开发、答辩讲解或交接给同事阅读源码。
+
+--------------------------------------------------------------------------------
+一、仓库顶层目录
+--------------------------------------------------------------------------------
+
+  backend/          Spring Boot 后端工程（Maven）
+  frontend/         Flutter 移动端工程
+  部署与启动说明.txt   环境安装与运行步骤（面向部署人员）
+  代码说明文档.txt     本文件（面向开发人员）
+
+--------------------------------------------------------------------------------
+二、后端（backend/）技术栈与入口
+--------------------------------------------------------------------------------
+
+  语言与框架：
+    - Java 17
+    - Spring Boot 3.2.x
+    - Spring Web、Spring Data JPA、Spring Security
+    - MySQL（mysql-connector-j）
+    - JWT（jjwt）
+    - Lombok（简化实体与注入代码）
+
+  入口类：
+    com.videoedit.VideoEditApplication
+    标准 Spring Boot 启动类，运行后内嵌 Tomcat 监听端口见 application.yml（默认 8080）。
+
+  配置文件：
+    backend/src/main/resources/application.yml
+    - server.port：HTTP 端口
+    - spring.datasource.*：MySQL 连接
+    - spring.jpa.hibernate.ddl-auto：默认 update（启动时按实体更新表结构）
+    - app.jwt.*：JWT 密钥与过期时间
+    - app.upload.*：各类上传目录（相对运行目录）
+    - app.ffmpeg.path：调用 FFmpeg 的可执行文件名或路径
+
+--------------------------------------------------------------------------------
+三、后端包结构（com.videoedit.*）
+--------------------------------------------------------------------------------
+
+  config/
+    SecurityConfig.java
+      - 关闭 CSRF、无状态 Session
+      - 放行 /api/auth/**、/api/public/**、/uploads/**
+      - 其余请求需携带 JWT，由 JwtAuthenticationFilter 校验
+      - 配置 CORS（允许跨域，便于 Web/工具调试）
+
+    JwtAuthenticationFilter.java
+      - 从 Authorization: Bearer <token> 解析用户 ID，放入 SecurityContext
+
+    WebConfig.java
+      - 将本地目录映射为 HTTP 静态路径：
+        /uploads/videos、/uploads/music、/uploads/avatars、/uploads/exports
+
+    DataInitializer.java
+      - 应用启动时若音乐/模板表为空，则插入一批示例数据（音乐元数据、模板描述等）
+
+    GlobalExceptionHandler.java
+      - @RestControllerAdvice：校验异常、RuntimeException、通用 Exception 统一转为 ApiResponse
+
+  controller/        REST 控制器，路径前缀见各类 @RequestMapping
+
+    AuthController      /api/auth
+      POST /login        登录
+      POST /register     注册
+
+    UserController      /api/user
+      用户信息、统计、头像上传、改密等（需登录）
+
+    VideoController     /api/video
+      视频项目 CRUD、素材上传、裁剪/合成/导出等（需登录，具体见源码）
+
+    MusicController     /api/music   音乐列表、推荐等
+
+    TemplateController  /api/templates  模板列表等
+
+  service/
+    UserService           注册（密码 BCrypt）、登录、签发 JWT
+    VideoProjectService   项目与视频业务逻辑、调用 FFmpeg、文件存储
+    MusicService、TemplateService  音乐与模板业务
+
+  repository/
+    Spring Data JPA 接口，继承 JpaRepository，按实体定义查询方法。
+
+  entity/
+    User              用户
+    VideoProject      视频剪辑项目
+    MusicResource     音乐资源元数据
+    VideoTemplate     模板元数据
+
+  dto/
+    请求/响应封装，如 LoginRequest、RegisterRequest、LoginResponse、ApiResponse 等。
+
+  util/
+    JwtUtil           生成与解析 JWT
+    FFmpegUtil        封装 FFmpeg 命令行，完成转码、裁剪、拼接等
+
+--------------------------------------------------------------------------------
+四、后端安全与鉴权流程（简述）
+--------------------------------------------------------------------------------
+
+  1. 用户调用 POST /api/auth/login 或 /register，成功后返回 token（及用户信息）。
+  2. 客户端保存 token，后续请求 Header 带：Authorization: Bearer <token>。
+  3. JwtAuthenticationFilter 校验签名与过期时间，将 userId 设为 Principal。
+  4. Controller 中通过 Authentication 取得当前用户 ID（如 VideoController）。
+
+--------------------------------------------------------------------------------
+五、后端业务要点（视频相关）
+--------------------------------------------------------------------------------
+
+  - 上传文件保存到 app.upload.* 对应目录，并通过 WebConfig 提供 URL 访问。
+  - 视频处理依赖本机 FFmpeg；若未安装或 PATH 未配置，相关接口会失败。
+  - 大文件上传上限在 application.yml 的 multipart 配置中（默认较大，注意磁盘）。
+
+--------------------------------------------------------------------------------
+六、移动端（frontend/）技术栈与入口
+--------------------------------------------------------------------------------
+
+  框架：Flutter（Dart）
+  状态管理：Provider（ChangeNotifier）
+  HTTP：dio
+  本地存储：shared_preferences（保存 token、用户标识等）
+
+  入口：
+    lib/main.dart
+    - 注册 AuthProvider
+    - MaterialApp 主题 AppTheme.darkTheme
+    - 首页为 SplashScreen，路由含 /login、/home
+
+--------------------------------------------------------------------------------
+七、移动端目录结构（lib/）
+--------------------------------------------------------------------------------
+
+  main.dart                 应用入口、全局 Provider、路由表
+
+  providers/
+    auth_provider.dart      登录/注册/登出，调用 ApiService，写入 SharedPreferences
+
+  services/
+    api_service.dart        封装所有 HTTP 接口：鉴权头、FormData 上传、各业务 API
+
+  screens/
+    splash_screen.dart      启动页，检查登录态跳转
+    login_screen.dart       登录/注册页
+    home_screen.dart        主框架/导航
+    project_list_screen.dart 项目列表
+    video_editor_screen.dart 剪辑主界面（体积较大，含时间轴、预览等）
+    template_screen.dart    模板
+    music_screen.dart       音乐
+    profile_screen.dart     个人中心/统计等
+
+  utils/
+    constants.dart          全局常量：AppConstants.baseUrl（后端地址）、存储 Key 等
+    app_theme.dart          主题色与组件样式
+
+  assets/
+    images/                 图片资源（需在 pubspec.yaml 中声明）
+
+--------------------------------------------------------------------------------
+八、前后端对接要点
+--------------------------------------------------------------------------------
+
+  1. 基准地址
+     lib/utils/constants.dart 中：
+       AppConstants.baseUrl = 'http://10.0.2.2:8080'
+     与「部署与启动说明.txt」中模拟器/真机说明一致。
+
+  2. 统一响应
+     后端 ApiResponse 与前端解析字段（如 code、message、data）需一致；
+     若后端变更字段，需同步改 api_service.dart 与调用处。
+
+  3. 鉴权
+     ApiService 在拦截器中自动附加 Bearer token；登出时清除本地 prefs。
+
+--------------------------------------------------------------------------------
+九、Android 工程说明（frontend/android/）
+--------------------------------------------------------------------------------
+
+  - Gradle Kotlin DSL：settings.gradle.kts、app/build.gradle.kts
+  - local.properties：本机 android.sdk、flutter.sdk（勿提交含隐私路径若团队规范要求）
+  - gradle.properties：JVM 内存、AndroidX、以及为中文路径/跨盘编译做的开关说明
+  - AndroidManifest.xml：应用权限与 cleartext 等配置
+
+--------------------------------------------------------------------------------
+十、扩展开发建议
+--------------------------------------------------------------------------------
+
+  新增后端接口：
+    1) 在 SecurityConfig 中确认路径是否需要放行或必须登录
+    2) 写 Controller → Service → Repository
+    3) 在 ApiService 增加方法并在 UI 调用
+
+  新增页面：
+    1) screens 下新建 Widget
+    2) 在 home 或路由中接入
+    3) 需要全局状态时考虑新建 Provider 或在现有 Provider 扩展
+
+  修改数据库字段：
+    1) 改 Entity
+    2) 依赖 ddl-auto=update 时重启后端；生产环境应使用迁移工具（Flyway/Liquibase）
+
+--------------------------------------------------------------------------------
+十一、测试与质量
+--------------------------------------------------------------------------------
+
+  - backend：可使用 mvn test（若有测试类）
+  - frontend：flutter test、widget_test.dart 为模板，可按业务补充
+
+--------------------------------------------------------------------------------
+十二、术语对照（答辩可用）
+--------------------------------------------------------------------------------
+
+  JWT        无状态令牌，用于接口鉴权
+  REST       以资源为中心的 HTTP API 风格
+  JPA/Hibernate ORM，将 Java 实体映射到关系表
+  FFmpeg     开源音视频处理命令行工具，后端通过 Process 或封装类调用
+  Provider   Flutter 官方推荐的状态管理方案之一
+
+================================================================================
+文档结束。阅读源码时请配合 IDE 全局搜索类名、API 路径；以实际代码为准。
+================================================================================

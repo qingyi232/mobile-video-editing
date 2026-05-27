@@ -1,0 +1,71 @@
+=== TOC area (paragraphs 0-130) ===
+
+[9] style=Normal | font=仿宋, size=279400, bold=True | 本科毕业设计
+[13] style=Normal | font=Times New Roman, size=203200, bold=True | 学院名称：人工智能学院
+[14] style=Normal | font=Times New Roman, size=203200, bold=True | 学科专业：软件工程
+[15] style=Normal | font=Times New Roman, size=203200, bold=True | 题    目：移动端短视频智能剪辑APP的
+[16] style=Normal | font=None, size=203200, bold=True | 设计与实现
+[17] style=Normal | font=Times New Roman, size=203200, bold=True | 研究方向： 深度学习应用
+[18] style=Normal | font=Times New Roman, size=203200, bold=True | 年    级： 2022    学号：  22103423
+[19] style=Normal | font=Times New Roman, size=203200, bold=True | 学生姓名： 郭湘
+[21] style=Normal | font=Times New Roman, size=203200, bold=True | 二〇二六 年 六 月
+[22] style=Normal | font=Times New Roman, size=133350, bold=None | 学校代码10057
+[23] style=Normal | font=Times New Roman, size=133350, bold=None | 密级  公开
+[28] style=Normal | font=None, size=279400, bold=True | 移动端短视频智能剪辑的APP设计与实现
+[29] style=Normal | font=Times New Roman, size=279400, bold=True | Design and Implementation of Mobile Short Video Intelligent Editing APP
+[45] style=Normal | font=Times New Roman, size=203200, bold=None | 二〇二六 年 六 月
+[47] style=Normal | font=None, size=203200, bold=True | 天津科技大学
+[48] style=Normal | font=None, size=203200, bold=True | 学位论文原创性声明
+[50] style=Body Text Indent 2 | font=None, size=152400, bold=None | 本人郑重声明：所呈交的学位论文，是本人在导师的指导下，独立进行研究工作所取得的成果。除文中已经注明引用的内容外，本论文不包含任何其他个人或集体已经发表或撰写过的
+[52] style=Normal | font=None, size=177800, bold=None | 学位论文作者签名：
+[53] style=Normal | font=None, size=177800, bold=None | 日期： 2026  年 6 月 5 日
+[56] style=Normal | font=None, size=203200, bold=True | 天津科技大学
+[57] style=Normal | font=None, size=203200, bold=True | 学位论文使用授权书
+[59] style=Body Text Indent 2 | font=None, size=152400, bold=None | 本人同意学校保留并向国家有关部门或机构送交论文的复印件和电子版，允许论文被查阅和借阅。
+[60] style=Normal | font=None, size=152400, bold=None | 本学位论文属于 ：
+[61] style=Normal | font=宋体, size=152400, bold=None | ☑公开论文
+[62] style=Normal | font=宋体, size=152400, bold=None | □内部论文，保密□1年/□2年/□3年，过保密期后适用本授权书。
+[63] style=Normal | font=宋体, size=152400, bold=None | □秘密论文，保密    年（不超过10年），过保密期后适用本授权书。
+[64] style=Normal | font=宋体, size=152400, bold=None | □机密论文，保密    年（不超过20年），过保密期后适用本授权书。
+[65] style=Normal | font=宋体, size=152400, bold=True | （请在以上方框内选择打“√”）
+[67] style=Normal | font=宋体, size=177800, bold=None | 学位论文作者签名：        指导教师签名：
+[68] style=Normal | font=宋体, size=177800, bold=None | 日期： 2026 年  6 月  5 日      日期： 2026  年  6 月  5 日
+[71] style=Normal | font=黑体, size=177800, bold=None | 天津科技大学本科毕业设计（ 论文） 任务书
+[73] style=Normal | font=Times New Roman, size=152400, bold=None | 人工智能	学院     软件工程	专业
+[75] style=Normal | font=Times New Roman, size=152400, bold=None | 学生学号： 22103423	学生姓名：  郭湘   指导教师姓名:   宋鹏
+[77] style=Normal | font=Times New Roman, size=152400, bold=None | 完成期限：  2025  年  12  月  1  日至   2026  年  6	月  10	日
+[79] style=Normal | font=Times New Roman, size=152400, bold=None | 一、题目名称：   移动端短视频智能剪辑APP的设计与实现
+[81] style=Normal | font=Times New Roman, size=152400, bold=None | 二、设计(论文)内容及要求：
+[83] style=Normal | font=Times New Roman, size=152400, bold=None | （一）设计内容
+[84] style=Normal | font=Times New Roman, size=152400, bold=None | 当前短视频行业发展迅猛，但普通用户在短视频剪辑过程中面临诸多困境：专业剪辑软件操作门槛高、上手难度大，而简易剪辑工具缺乏智能性，难以满足用户高效、高质量的剪辑需
+[85] style=Normal | font=Times New Roman, size=152400, bold=None | 1. 基础视频编辑功能：实现短视频剪辑核心基础功能，包括视频导入（支持本地视频、相机拍摄导入）、视频片段裁剪与拼接、转场特效添加、背景音乐添加与人声分离，以及基
+[86] style=Normal | font=Times New Roman, size=152400, bold=None | 2. 智能辅助剪辑功能：采用CNN+LSTM深度学习模型实现视频场景识别，同时结合视频帧清晰度分析，自动筛选出画面质量优良的视频片段；基于场景识别结果，为用户智
+[87] style=Normal | font=Times New Roman, size=152400, bold=None | 3. 系统性能优化：针对移动端设备特性，优化APP运行性能。通过调整FFmpeg参数提升视频渲染速度，采用图像压缩技术减少APP内存占用，优化界面渲染逻辑，避免
+[88] style=Normal | font=Times New Roman, size=152400, bold=None | 4. 特色增值功能：提供多元化剪辑模板，涵盖节日、vlog、教程等常见场景，方便用户快速套用；支持视频横竖屏自由切换，适配不同移动端展示需求；支持MP4、AVI
+[89] style=Normal | font=Times New Roman, size=152400, bold=None | （二）设计要求
+[90] style=Normal | font=Times New Roman, size=152400, bold=None | 1.  技术要求：前端采用Flutter框架进行跨平台开发，确保APP可同时适配Android与iOS两大移动端系统，保证界面一致性与操作流畅性；后端采用Spr
+[91] style=Normal | font=Times New Roman, size=152400, bold=None | 2.  文档要求：在查阅相关参考文献的基础上，完成开题报告的撰写；全程参与APP的详细设计、开发、调试与测试工作，确保各项功能正常运行；同时完成外文资料翻译（译
+[92] style=Normal | font=Times New Roman, size=152400, bold=None | 参考文献：
+[93] style=Normal | font=None, size=152400, bold=None | [1] Li H, Zhu Y, Shang Z, Wang Z, Wu X. A Comprehensive Survey on Video Summariz
+[94] style=Normal | font=None, size=152400, bold=None | [2] Parihar A S, Mittal R, Jain P, Himanshu. Survey and Comparison of Video Summ
+[95] style=Normal | font=None, size=152400, bold=None | [3] Patil S, Nandvikar S, Pardeshi A, Kurhade P S. Automatic Devanagari Text Sum
+[96] style=Normal | font=None, size=152400, bold=None | [4] Teng X, Gui X, Dai H, Du T, Wang Z, Li H. A Smooth Video Summarization Metho
+[97] style=Normal | font=None, size=152400, bold=None | [5] Altundogan T G, Karaköse M, Mert F. A New Multi Objective Video Summarizatio
+[98] style=Normal | font=None, size=152400, bold=None | [6] 陈宏才.基于深度学习的视频自动剪辑与拼接技术研究[J].数字通信世界,2025,(11):68-70.
+[105] style=Normal | font=Times New Roman, size=152400, bold=None | 指导教师签名:
+[106] style=Normal | font=Times New Roman, size=152400, bold=None | 填写日期：  2025  年  12  月  20 日
+[111] style=Normal | font=Times New Roman, size=190500, bold=None | 摘  要
+[112] style=Normal | font=Times New Roman, size=152400, bold=None | 随着移动互联网技术的快速发展与智能终端设备的广泛普及，短视频作为一种新兴的信息传播形式，已经成为人们日常生活当中不可或缺的一部分内容。然而，当前市场上大部分的视
+[113] style=Normal | font=Times New Roman, size=152400, bold=None | 本系统采用前后端分离的技术架构来进行构建。前端方面选择采用Flutter跨平台开发框架，以Dart编程语言作为开发语言，实现了对Android和iOS两大主流移
+[114] style=Normal | font=Times New Roman, size=152400, bold=None | 在智能辅助功能方面，系统实现了基于深度学习模型的视频场景识别功能，能够自动分析识别视频中的不同场景类型；实现了基于帧画面清晰度分析的智能片段筛选功能，可以自动筛
+[115] style=Normal | font=Times New Roman, size=152400, bold=None | 经过系统的功能测试和性能测试验证，结果表明本系统各项功能运行正常且稳定可靠，主要API接口的响应时间均在可以接受的范围之内，能够满足普通用户在移动端进行短视频智
+[116] style=Normal | font=Times New Roman, size=152400, bold=True | 关键词：短视频剪辑；Flutter；Spring Boot；FFmpeg；场景识别
+[117] style=Normal | font=None, size=None, bold=None | ；
+[118] style=Normal | font=Arial, size=190500, bold=False | ABSTRACT
+[119] style=Normal | font=Times New Roman, size=152400, bold=None | With the rapid development of mobile Internet technology and the widespread popu
+[120] style=Normal | font=Times New Roman, size=152400, bold=None | The system adopts a front-end and back-end separated technical architecture. The
+[121] style=Normal | font=Times New Roman, size=152400, bold=None | In terms of intelligent assistant functions, the system implements video scene r
+[122] style=Normal | font=Times New Roman, size=152400, bold=None | Through systematic functional testing and performance testing verification, the 
+[123] style=Normal | font=Times New Roman, size=152400, bold=True | Keywords: Short Video Editing; Flutter; Spring Boot; FFmpeg; Scene Recognition
+[128] style=Normal | font=Times New Roman, size=190500, bold=False | 1  绪论
+[129] style=Normal | font=Times New Roman, size=152400, bold=None | 近年来，随着移动互联网技术的不断成熟以及智能手机性能的持续提升，短视频这一内容形式在全球范围内得到了迅速的发展与广泛的传播。根据中国互联网络信息中心（CNNIC

@@ -1,0 +1,10 @@
+=== ORIG - Section 4.2.2 Video Processing ===
+[226] (15 chars) 4.2.2  视频处理模块实现
+[227] (647 chars) 视频处理模块是本系统后端最为核心的功能模块，主要代码位于VideoController和VideoProjectService两个类中。该模块主要包括以下十一项核心功能的实现：（1）视频文件上传与预处理，支持视频文件的接收存储和moov atom前置优化；（2）视频片段精确裁剪，通过FFmpeg的-
+
+=== V3 - Section 4.2.2 Video Processing ===
+[226] (15 chars) 4.2.2  视频处理模块实现
+[227] (647 chars) 视频处理模块是本系统后端最为核心的功能模块，主要代码位于VideoController和VideoProjectService两个类中。该模块主要包括以下十一项核心功能的实现：（1）视频文件上传与预处理，支持视频文件的接收存储和moov atom前置优化；（2）视频片段精确裁剪，通过FFmpeg的-
+[228] (0 chars) 
+[229] (0 chars) 
+[230] (0 chars) 
